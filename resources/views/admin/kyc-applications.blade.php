@@ -22,7 +22,7 @@ if (Auth('admin')->User()->dashboard_style == 'light') {
 
                 <div class="mt-2 mb-4 d-flex justify-content-between align-items-center">
                     <div>
-                        <h1 class="title1 text-{{ $text }}">{{ $kyc->user->name }} KYC Application</h1>
+                        <h1 class="title1 text-{{ $text }}">{{ $kyc->first_name." ".$kyc->last_name }} KYC Application</h1>
                         @if ($kyc->status == 'Verified')
                             <span class="badge badge-success">Verified</span>
                         @else
