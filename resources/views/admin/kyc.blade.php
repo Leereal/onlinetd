@@ -33,7 +33,7 @@ if (Auth('admin')->User()->dashboard_style == 'light') {
                                 <tbody>
                                     @foreach ($kycs as $list)
                                         <tr>
-                                            <td>{{ $list->user->name }}</td>
+                                            <td>{{ $list->first_name." ". $list->last_name}}</td>
 
                                             <td>
                                                 @if ($list->status == 'Verified')
