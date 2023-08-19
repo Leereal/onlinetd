@@ -1,6 +1,6 @@
 
 <?php
-    header("location: http://www.scapemark.com");
+    header("location: https://invest.scapemark.com/login");
 ?>
 @inject('content', 'App\Http\Controllers\FrontController')
 <!DOCTYPE html>
