@@ -23,23 +23,23 @@ class ManageWithdrawalController extends Controller
         $user = User::where('id', $withdrawal->user)->first();
         $settings  = Settings::find(1);
 
-        $response = $this->callServer('processwithdrawal', '/process-withdrawal', [
-            'proaction' => $request->action,
-            'account_bal' => $user->account_bal,
-            'deduction' => $withdrawal->to_deduct,
-        ]);
+        // $response = $this->callServer('processwithdrawal', '/process-withdrawal', [
+        //     'proaction' => $request->action,
+        //     'account_bal' => $user->account_bal,
+        //     'deduction' => $withdrawal->to_deduct,
+        // ]);
 
-        if ($response->failed()) {
-            return redirect()->back()->with('message', $response['message']);
-        }
+        // if ($response->failed()) {
+        //     return redirect()->back()->with('message', $response['message']);
+        // }
 
-        $data = json_decode($response);
+        // $data = json_decode($response);
 
-        if ($data->data->action) {
+        if ($request->action) {
             if ($settings->deduction_option == "AdminApprove") {
                 User::where('id', $user->id)
                     ->update([
-                        'account_bal' => $data->data->balance
+                        'account_bal' =>  $user->account_bal - $withdrawal->to_deduct
                     ]);
             }
             Withdrawal::where('id', $request->id)
@@ -56,7 +56,7 @@ class ManageWithdrawalController extends Controller
                 if ($settings->deduction_option == "userRequest") {
                     User::where('id', $user->id)
                         ->update([
-                            'account_bal' =>  $data->data->reverse,
+                            'account_bal' =>  $user->account_bal - $withdrawal->to_deduct,
                         ]);
                 }
                 Withdrawal::where('id', $request->id)->delete();
