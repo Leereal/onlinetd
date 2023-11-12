@@ -20,8 +20,8 @@ class TopupController extends Controller
         $user_bal = $user->account_bal;
         $user_bonus = $user->bonus;
         $user_roi = $user->roi;
-        $user_Ref = $user->ref_bonus;  
-        dd($request->toArray());
+        $user_Ref = $user->ref_bonus; 
+      
         // $response = $this->callServer('typesystem', '/top-up', [
         //     'topUpType' => $request->t_type,
         //     'userBalance' => $user_bal,
